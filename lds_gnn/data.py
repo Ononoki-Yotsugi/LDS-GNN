@@ -301,11 +301,17 @@ def graph_delete_connections(prob_del, seed, adj, features, y_train,
                 del_adj[other_node, k] = 1
                 add_edges += 1
         print('# ADDED EDGES: ', add_edges)
-    return (adj, del_adj, features, y_train) + other_splittables
+    return (adj, del_adj, features, y_train) + other_splittables   # 在原来基础上多返回一个经过丢边的邻接矩阵
 
 
 def load_data_del_edges(prob_del=0.4, seed=0, to_dense=True, enforce_connected=True,
                         dataset_name='cora'):
+    # adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask=load_data(dataset_name)
+    # print(adj)   尚未归一化的邻接矩阵
+    # print(features)   尚未归一化的特征
+    # print(y_train)   one-hot标签
+    # print(train_mask)
+    # exit(0)
     res = graph_delete_connections(prob_del, seed, *load_data(dataset_name), to_dense=to_dense,
                                    enforce_connected=enforce_connected)
     return res

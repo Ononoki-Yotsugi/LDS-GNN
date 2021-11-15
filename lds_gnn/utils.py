@@ -198,6 +198,7 @@ class Config:
 
     @classmethod
     def grid(cls, **kwargs):
+        # 构造方法，根据传入的参数构建一个对象
         """Builds a mesh grid with given keyword arguments for this Config class.
         If the value is not a list, then it is considered fixed"""
 
@@ -216,7 +217,6 @@ class Config:
             for e in v:
                 copy_v.append(MncDc(e) if isinstance(e, tuple) else e)
             sin[k] = copy_v
-
         grd = np.array(np.meshgrid(*sin.values()), dtype=object).T.reshape(-1, len(sin.values()))
         return [cls(**far.utils.merge_dicts(
             {k: v for k, v in kwargs.items() if not isinstance(v, list)},

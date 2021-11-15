@@ -151,6 +151,8 @@
 
 import gcn.metrics
 from sklearn.neighbors import kneighbors_graph
+import os
+os.environ['CUDA_VISIBLE_DEVICES']='2'
 
 try:
     from lds_gnn.data import ConfigData, UCI, EdgeDelConfigData
@@ -356,6 +358,7 @@ def main(data, method, seed, missing_percentage):
     elif data == '20news10':
         data_config = UCI(seed=seed, dataset_name=data, n_train=100, n_val=100, n_es=100, scale=False)
     elif data == 'cora' or data == 'citeseer':
+        # 我要关注的是这个
         data_config = EdgeDelConfigData(prob_del=missing_percentage, seed=seed, enforce_connected=False,
                                         dataset_name=data)
     elif data == 'fma':
